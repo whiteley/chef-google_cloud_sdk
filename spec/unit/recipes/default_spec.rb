@@ -16,14 +16,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 require 'spec_helper'
 
 describe 'google_cloud_sdk::default' do
-  context 'When all attributes are default, on an unspecified platform' do
+  context 'When all attributes are default, on CentOS 7.2' do
     let(:chef_run) do
-      runner = ChefSpec::ServerRunner.new
+      runner = ChefSpec::ServerRunner.new(platform: 'centos', version: '7.2.1511')
       runner.converge(described_recipe)
+    end
+
+    it 'installs the google-cloud-sdk' do
+      expect(chef_run).to create_yum_repository('google-cloud-sdk')
+      expect(chef_run).to install_package('google-cloud-sdk')
+    end
+
+    it 'converges successfully' do
+      expect { chef_run }.to_not raise_error
+    end
+  end
+
+  context 'When all attributes are default, on Ubuntu 16.04' do
+    let(:chef_run) do
+      runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04')
+      runner.converge(described_recipe)
+    end
+
+    it 'installs the google-cloud-sdk' do
+      expect(chef_run).to add_apt_repository('google-cloud-sdk')
+      expect(chef_run).to install_package('google-cloud-sdk')
     end
 
     it 'converges successfully' do

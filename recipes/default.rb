@@ -16,3 +16,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+case node['platform_family']
+when 'debian'
+  apt_repository 'google-cloud-sdk' do
+    uri 'http://packages.cloud.google.com/apt'
+    distribution "cloud-sdk-#{node['lsb']['codename']}"
+    components %w( main )
+    key 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
+  end
+when 'rhel'
+  yum_repository 'google-cloud-sdk' do
+    description 'Google Cloud SDK'
+    baseurl 'https://packages.cloud.google.com/yum/repos/cloud-sdk-el7-x86_64'
+    gpgcheck true
+    repo_gpgcheck true
+    gpgkey %w(https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg)
+  end
+end
+
+package 'google-cloud-sdk'
