@@ -7,6 +7,14 @@ Installs the [Google Cloud SDK](https://cloud.google.com/sdk/downloads)
 * Red Hat Enterprise Linux 7 and CentOS 7 systems
 * Ubuntu releases that have not reached end of life
 
+### Optionally install any of these additional components
+* google-cloud-sdk-app-engine-java
+* google-cloud-sdk-app-engine-python
+* google-cloud-sdk-bigtable-emulator (Debian / Ubuntu only)
+* google-cloud-sdk-datastore-emulator
+* google-cloud-sdk-pubsub-emulator
+* kubectl
+
 ### Run gcloud init to get started:
 
 ```shellsession

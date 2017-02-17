@@ -26,8 +26,7 @@ describe 'google_cloud_sdk::default' do
     end
 
     it 'installs the google-cloud-sdk' do
-      expect(chef_run).to create_yum_repository('google-cloud-sdk')
-      expect(chef_run).to install_package('google-cloud-sdk')
+      expect(chef_run).to create_google_cloud_sdk_install('default')
     end
 
     it 'converges successfully' do
@@ -42,8 +41,7 @@ describe 'google_cloud_sdk::default' do
     end
 
     it 'installs the google-cloud-sdk' do
-      expect(chef_run).to add_apt_repository('google-cloud-sdk')
-      expect(chef_run).to install_package('google-cloud-sdk')
+      expect(chef_run).to create_google_cloud_sdk_install('default')
     end
 
     it 'converges successfully' do
